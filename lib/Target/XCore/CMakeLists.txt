@@ -7,6 +7,8 @@ tablegen(LLVM XCoreGenAsmWriter.inc -gen-asm-writer)
 tablegen(LLVM XCoreGenDAGISel.inc -gen-dag-isel)
 tablegen(LLVM XCoreGenCallingConv.inc -gen-callingconv)
 tablegen(LLVM XCoreGenSubtargetInfo.inc -gen-subtarget)
+tablegen(LLVM XCoreGenAsmMatcher.inc -gen-asm-matcher)
+tablegen(LLVM XCoreGenMCCodeEmitter.inc -gen-emitter)
 add_public_tablegen_target(XCoreCommonTableGen)
 
 add_llvm_target(XCoreCodeGen
@@ -27,6 +29,7 @@ add_llvm_target(XCoreCodeGen
   XCoreFrameToArgsOffsetElim.cpp
   )
 
+add_subdirectory(AsmParser)
 add_subdirectory(Disassembler)
 add_subdirectory(InstPrinter)
 add_subdirectory(TargetInfo)

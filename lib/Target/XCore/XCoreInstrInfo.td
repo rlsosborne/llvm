@@ -959,12 +959,12 @@ def BAU_1r : _F1R<0b001001, (outs), (ins GRRegs:$a),
                  "bau $a",
                  [(brind GRRegs:$a)]>;
 
-let isBranch=1, isIndirectBranch=1, isTerminator=1, isBarrier = 1 in
+let isBranch=1, isIndirectBranch=1, isTerminator=1, isBarrier = 1, isCodeGenOnly = 1 in
 def BR_JT : PseudoInstXCore<(outs), (ins InlineJT:$t, GRRegs:$i),
                             "bru $i\n$t",
                             [(XCoreBR_JT tjumptable:$t, GRRegs:$i)]>;
 
-let isBranch=1, isIndirectBranch=1, isTerminator=1, isBarrier = 1 in
+let isBranch=1, isIndirectBranch=1, isTerminator=1, isBarrier = 1, isCodeGenOnly = 1 in
 def BR_JT32 : PseudoInstXCore<(outs), (ins InlineJT32:$t, GRRegs:$i),
                               "bru $i\n$t",
                               [(XCoreBR_JT32 tjumptable:$t, GRRegs:$i)]>;

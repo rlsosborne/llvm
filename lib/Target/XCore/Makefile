@@ -15,9 +15,10 @@ TARGET = XCore
 BUILT_SOURCES = XCoreGenRegisterInfo.inc XCoreGenInstrInfo.inc \
 		XCoreGenAsmWriter.inc \
 		XCoreGenDAGISel.inc XCoreGenCallingConv.inc \
-		XCoreGenDisassemblerTables.inc XCoreGenSubtargetInfo.inc
+		XCoreGenDisassemblerTables.inc XCoreGenSubtargetInfo.inc \
+		XCoreGenAsmMatcher.inc XCoreGenMCCodeEmitter.inc
 
-DIRS = Disassembler InstPrinter TargetInfo MCTargetDesc
+DIRS = AsmParser Disassembler InstPrinter TargetInfo MCTargetDesc
 
 include $(LEVEL)/Makefile.common
 
