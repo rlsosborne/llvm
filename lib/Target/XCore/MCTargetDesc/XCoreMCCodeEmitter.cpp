@@ -44,6 +44,9 @@ private:
                                  SmallVectorImpl<MCFixup> &Fixups,
                                  const MCSubtargetInfo &STI) const;
 
+  unsigned PostEncode2RInstruction(const MCInst &MI, unsigned EncodedValue,
+                                   const MCSubtargetInfo &STI) const;
+
   /// getMachineOpValue - Return binary encoding of operand. If the machine
   /// operand requires relocation, record the relocation and return zero.
   unsigned getMachineOpValue(const MCInst &MI, const MCOperand &MO,
@@ -82,6 +85,22 @@ XCoreMCCodeEmitter::getMachineOpValue(const MCInst &MI, const MCOperand &MO,
 
   assert(MO.isImm() && "did not expect relocated expression");
   return static_cast<unsigned>(MO.getImm());
+}
+
+unsigned XCoreMCCodeEmitter::
+PostEncode2RInstruction(const MCInst &MI, unsigned EncodedValue,
+                        const MCSubtargetInfo &STI) const {
+  SmallVector<MCFixup, 1> Fixups;
+  unsigned Op1Value = getMachineOpValue(MI, MI.getOperand(0), Fixups, STI);
+  unsigned Op2Value = getMachineOpValue(MI, MI.getOperand(1), Fixups, STI);
+  EncodedValue |= Op2Value & 3;
+  EncodedValue |= (Op1Value & 3) << 2;
+  unsigned Combined = (Op1Value >> 2) + (Op1Value >> 2) * 3;
+  if (Combined < 27)
+    Combined += 27;
+  EncodedValue |= (Combined >> 5) << 5;
+  EncodedValue |= (Combined & 31) << 6;
+  return EncodedValue;
 }
 
 #include "XCoreGenMCCodeEmitter.inc"

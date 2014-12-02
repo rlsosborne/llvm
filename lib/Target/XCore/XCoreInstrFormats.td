@@ -156,6 +156,7 @@ class _F2R<bits<6> opc, dag outs, dag ins, string asmstr, list<dag> pattern>
   let Inst{15-11} = opc{5-1};
   let Inst{4} = opc{0};
   let DecoderMethod = "Decode2RInstruction";
+  let PostEncoderMethod = "PostEncode2RInstruction";
 }
 
 // 2R with first operand as an immediate. Used for TSETMR where the first
