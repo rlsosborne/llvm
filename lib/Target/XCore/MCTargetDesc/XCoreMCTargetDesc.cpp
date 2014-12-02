@@ -160,5 +160,9 @@ extern "C" void LLVMInitializeXCoreTargetMC() {
   TargetRegistry::RegisterMCInstPrinter(TheXCoreTarget,
                                         createXCoreMCInstPrinter);
 
+  // Register the MC code emitter
+  TargetRegistry::RegisterMCCodeEmitter(TheXCoreTarget,
+                                        createXCoreMCCodeEmitter);
+
   TargetRegistry::RegisterAsmStreamer(TheXCoreTarget, createXCoreMCAsmStreamer);
 }

@@ -15,9 +15,19 @@
 #define LLVM_LIB_TARGET_XCORE_MCTARGETDESC_XCOREMCTARGETDESC_H
 
 namespace llvm {
+class MCCodeEmitter;
+class MCContext;
+class MCInstrInfo;
+class MCRegisterInfo;
+class MCSubtargetInfo;
 class Target;
 
 extern Target TheXCoreTarget;
+
+MCCodeEmitter *createXCoreMCCodeEmitter(const MCInstrInfo &MCII,
+                                        const MCRegisterInfo &MRI,
+                                        const MCSubtargetInfo &STI,
+                                        MCContext &Ctx);
 
 } // End llvm namespace
 
