@@ -1317,3 +1317,10 @@ def : Pat<(load (cprelwrapper tconstpool:$b)),
 
 def : Pat<(cprelwrapper tconstpool:$b),
           (LDAWCP_lu6 tconstpool:$b)>;
+
+//===----------------------------------------------------------------------===//
+// Assembler Instruction Aliases
+//===----------------------------------------------------------------------===//
+
+def : InstAlias<"mov $a, $b", (ADD_2rus GRRegs:$a, GRRegs:$b, 0)>;
+def : InstAlias<"nop", (ADD_2rus R0, R0, 0)>;
