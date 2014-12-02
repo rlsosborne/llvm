@@ -12,14 +12,12 @@
 //===----------------------------------------------------------------------===//
 
 class XCoreReg<string n> : Register<n> {
-  field bits<4> Num;
   let Namespace = "XCore";
 }
 
-// Registers are identified with 4-bit ID numbers.
 // Ri - 32-bit integer registers
-class Ri<bits<4> num, string n> : XCoreReg<n> {
-  let Num = num;
+class Ri<bits<16> num, string n> : XCoreReg<n> {
+  let HWEncoding = num;
 }
 
 // CPU registers
